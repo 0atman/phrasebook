@@ -30,11 +30,11 @@
 (def app
   (api
     (resources "/")
-    (ANY "/*" [] (not-found "404 Not Found"))
     (GET "/" [] (loading-page))
     (GET "/about" [] (loading-page))
 
     (context "/api" []
 
       (GET "/ping" []
-        (ok {:ping "pong"})))))
+        (ok {:ping "pong"})))
+    (ANY "/*" [] (not-found "404 Not Found"))))
