@@ -15,3 +15,12 @@ pom.xml.asc
 *.log
 /.env
 /.sass-cache
+/lib/
+/classes/
+/target/
+/checkouts/
+.lein-deps-sum
+.lein-repl-history
+.lein-plugins/
+.lein-failures
+.nrepl-port
