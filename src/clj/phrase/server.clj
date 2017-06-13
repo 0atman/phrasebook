@@ -1,7 +1,8 @@
 (ns phrase.server
   (:require [phrase.handler :refer [app]]
             [config.core :refer [env]]
-            [ring.adapter.jetty :refer [run-jetty]])
+            [ring.adapter.jetty :refer [run-jetty]]
+            [ring.middleware.reload :refer [wrap-reload]])
   (:gen-class))
 
 (defn -main [& args]

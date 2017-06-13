@@ -31,17 +31,36 @@
     [:tbody
       (map table-row (range length))]])
 
+(defn reset-get! [an-atom endpoint]
+  "puts `response` into `an-atom`"
+  (go (let [response (<! (http/get endpoint))]
+        (reset! an-atom (str (:body response))))))
+
+(defn clj->json
+  [ds]
+  (.stringify js/JSON (clj->js ds)))
+
+(def up-and-atom (atom "NONE"))
 
 (defn home-page []
+
   [:div {:class "container-fluid"}
-    ;[:p (str (go (<! (http/get "/api/ping"))))]
+    [:p
+      [:input {:type "button" :value "UPDATE"
+                :on-click #(reset-get! up-and-atom "/api/context?auth=public&key=context")}]
+      [:input {:type "button" :value "data1"
+                :on-click #(http/post "/api/context/public/context"
+                            {:form-params {:data (clj->json {"1" "2"})}})}]
+      [:input {:type "button" :value "data2"
+                :on-click #(http/post "/api/context/public/context"
+                            {:form-params {:data (clj->json {"3" "4"})}})}]
+      @up-and-atom]
     [:div
       [:h1 "OAT.SH Phrasebook"]
       (generate-table "table" 5)]])
 
 (defn about-page []
   [:div {:class "container-fluid"}
-    ;[:p (str (go (<! (http/get "/api/ping"))))]
     [:div
       [:h2 "About phrasebook"]
       [:div [:a {:href "/"} "go to the home page"]]

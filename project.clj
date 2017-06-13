@@ -20,6 +20,7 @@
                  [secretary "1.2.3"]
                  [venantius/accountant "0.2.0"
                   :exclusions [org.clojure/tools.reader]]
+                 [clj-http "3.6.1"]
                  [cljs-http "0.1.43"]]
 
   :plugins [[lein-environ "1.0.2"]
@@ -81,7 +82,9 @@
    :nrepl-middleware ["cemerick.piggieback/wrap-cljs-repl"]
 
    :css-dirs ["resources/public/css"]
-   :ring-handler phrase.handler/app}
+   :ring-handler phrase.handler/app
+
+   :reload-clj-files true}
 
 
 
